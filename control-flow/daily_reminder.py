@@ -1,22 +1,25 @@
+def get_priority_message(task, priority):
+    match priority:
+        case "high":
+            return f"Reminder: '{task}' is a high priority task"
+        case "medium":
+            return f"Reminder: '{task}' is a medium priority task"
+        case "low":
+            return f"Note: '{task}' is a low priority task"
+        case _:
+            return f"Note: '{task}' is a task"
+
 def create_reminder():
     task = input("Enter your task: ")
     priority = input("Priority (high/medium/low): ")
     time_bound = input("Is it time-bound? (yes/no): ")
 
-    match priority:
-        case "high":
-            message = f"'{task}' is a high priority task"
-        case "medium":
-            message = f"'{task}' is a medium priority task"
-        case "low":
-            message = f"'{task}' is a low priority task"
-        case _:
-            message = f"'{task}' is a task"
-
+    base_message = get_priority_message(task, priority)
+    
     if time_bound.lower() == "yes":
-        print(f"\nReminder: {message} that requires immediate attention today!")
+        print(f"\n{base_message} that requires immediate attention today!")
     else:
-        print(f"\nNote: {message}. Consider completing it when you have free time.")
+        print(f"\n{base_message}. Consider completing it when you have free time.")
 
 if __name__ == "__main__":
     create_reminder()
